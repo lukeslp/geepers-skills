@@ -22,7 +22,7 @@ Direct edits to `skills/` in this repo are blocked by CI. Make changes in canoni
 ```bash
 for s in skills/*; do
   name=$(basename "$s")
-  cp -a "$s" "$HOME/.codex/skills/$name"
+  cp -a "$s" "$HOME/.claude/skills/$name"
 done
 ```
 
