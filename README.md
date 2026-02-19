@@ -1,30 +1,42 @@
 # geepers-skills
 
-Portable skill pack for Codex/Claude-style CLI workflows.
+Generated Claude-compatible skill mirror for the geepers ecosystem.
 
-## What This Repo Contains
+## Source of Truth
 
-- Core routing helpers: `skills/geepers`, `skills/team`, `skills/swarm`, `skills/quality`, `skills/dream`
-- Practical aliases: `skills/publish`, `skills/doublecheck`, `skills/poet`, `skills/readme`, `skills/humanize`
-- Workflow aliases: `skills/scout`, `skills/planner`, `skills/builder`, `skills/testing`, `skills/validator`
-- Source variants: `skills/dataset-publish`, `skills/geepers-doublecheck`, `skills/geepers-poet`, `skills/geepers-readme`
+This repository is synced from canonical skills in:
+- `https://github.com/lukeslp/geepers`
+- Canonical path: `skills/source/`
 
-## Local Source of Truth
+Direct edits to `skills/` in this repo are blocked by CI. Make changes in canonical source, then sync.
 
-These were synced from:
-- `~/.codex/skills`
+## What Is Here
 
-## Install Into Codex
+- `skills/`: generated skill folders
+- `.claude-plugin/marketplace.json`: generated marketplace metadata
+- `aliases.generated.json`: migration aliases
+- `.github/workflows/mirror-readonly-guard.yml`: mirror protection
 
-Copy one or more skills into your Codex skills directory:
+## Install
 
 ```bash
-cp -a skills/<skill-name> ~/.codex/skills/<skill-name>
+for s in skills/*; do
+  name=$(basename "$s")
+  cp -a "$s" "$HOME/.codex/skills/$name"
+done
 ```
 
-Then restart Codex.
+## Sync Workflow
 
-## Notes
+From canonical repo (`/home/coolhand/geepers`):
 
-- This repo is intended for sharing and versioning custom skills.
-- Keep secrets/tokens out of skill files.
+```bash
+python3 scripts/validate-skills.py --strict
+python3 scripts/build-platform-packages.py --platform claude --clean
+bash scripts/sync-mirrors.sh --platform claude --delete --skip-build
+bash scripts/report-drift.sh --platform claude --skip-missing
+```
+
+## License
+
+MIT
