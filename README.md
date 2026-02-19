@@ -1,5 +1,8 @@
 # geepers-skills
 
+[![MIT License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
+[![Language: Markdown](https://img.shields.io/badge/language-markdown-blue.svg)](https://daringfireball.net/projects/markdown/)
+
 Generated Claude-compatible skill mirror for the geepers ecosystem.
 
 ## Source of Truth
@@ -39,4 +42,6 @@ bash scripts/report-drift.sh --platform claude --skip-missing
 
 ## License
 
-MIT
+MIT — see [LICENSE](LICENSE)
+
+Built by [Luke Steuber](https://lukesteuber.com) · [luke@lukesteuber.com](mailto:luke@lukesteuber.com) · [@lukesteuber.com](https://bsky.app/profile/lukesteuber.com)
