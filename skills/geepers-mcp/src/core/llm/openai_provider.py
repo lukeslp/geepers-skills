@@ -13,7 +13,7 @@ import base64
 class OpenAIProvider(BaseLLMProvider):
     """OpenAI GPT provider."""
 
-    DEFAULT_MODEL = "gpt-4.1"
+    DEFAULT_MODEL = "gpt-5.4"
 
     def __init__(self, api_key: str = None, model: str = None):
         api_key = api_key or os.getenv("OPENAI_API_KEY")
@@ -132,13 +132,13 @@ class OpenAIProvider(BaseLLMProvider):
             image: Base64-encoded string or raw bytes
             prompt: Question about the image
             **kwargs: Optional parameters
-                - model: Vision model (default: "gpt-4o")
+                - model: Vision model (default: "gpt-5.4")
                 - max_tokens: Maximum response length
 
         Returns:
             CompletionResponse with image analysis
         """
-        model = kwargs.get("model", "gpt-4o")
+        model = kwargs.get("model", "gpt-5.4")
         max_tokens = kwargs.get("max_tokens", 500)
 
         # Convert bytes to base64 if needed

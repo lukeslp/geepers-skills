@@ -89,14 +89,6 @@ PROVIDER_CAPABILITIES = {
         'tts': False,
         'embedding': True
     },
-    'manus': {
-        'chat': True,
-        'streaming': True,
-        'image_generation': False,
-        'vision': True,
-        'tts': False,
-        'embedding': False
-    },
     'elevenlabs': {
         'chat': False,
         'streaming': False,
@@ -119,24 +111,24 @@ PROVIDER_CAPABILITIES = {
 # Model complexity tiers for cost optimization
 COMPLEXITY_TIERS = {
     'openai': {
-        'simple': 'gpt-4o-mini',
-        'medium': 'gpt-4o',
-        'complex': 'gpt-4o'
+        'simple': 'gpt-5-mini',
+        'medium': 'gpt-5.4',
+        'complex': 'gpt-5.4'
     },
     'anthropic': {
-        'simple': 'claude-3-haiku-20240307',
-        'medium': 'claude-3-5-sonnet-20241022',
-        'complex': 'claude-3-5-sonnet-20241022'
+        'simple': 'claude-haiku-4-5-20251001',
+        'medium': 'claude-sonnet-4-6',
+        'complex': 'claude-opus-4-6'
     },
     'xai': {
-        'simple': 'grok-beta',
-        'medium': 'grok-beta',
-        'complex': 'grok-beta'
+        'simple': 'grok-3-mini',
+        'medium': 'grok-3',
+        'complex': 'grok-4'
     },
     'groq': {
         'simple': 'llama-3.1-8b-instant',
-        'medium': 'llama-3.1-70b-versatile',
-        'complex': 'llama-3.1-70b-versatile'
+        'medium': 'llama-3.3-70b-versatile',
+        'complex': 'llama-3.3-70b-versatile'
     },
     'mistral': {
         'simple': 'mistral-small-latest',
@@ -144,19 +136,19 @@ COMPLEXITY_TIERS = {
         'complex': 'mistral-large-latest'
     },
     'gemini': {
-        'simple': 'gemini-1.5-flash',
-        'medium': 'gemini-1.5-pro',
-        'complex': 'gemini-1.5-pro'
+        'simple': 'gemini-3.1-flash-lite-preview',
+        'medium': 'gemini-3-flash-preview',
+        'complex': 'gemini-3.1-pro-preview'
     },
     'cohere': {
-        'simple': 'command-light',
-        'medium': 'command',
-        'complex': 'command-r-plus'
+        'simple': 'command-r7b-12-2024',
+        'medium': 'command-r-plus-08-2024',
+        'complex': 'command-a-03-2025'
     },
     'perplexity': {
-        'simple': 'llama-3.1-sonar-small-128k-online',
-        'medium': 'llama-3.1-sonar-large-128k-online',
-        'complex': 'llama-3.1-sonar-huge-128k-online'
+        'simple': 'sonar',
+        'medium': 'sonar-pro',
+        'complex': 'sonar-reasoning'
     },
     'huggingface': {
         'simple': 'microsoft/Phi-3-mini-4k-instruct',
@@ -256,12 +248,6 @@ class ProviderFactory:
             pass
 
         try:
-            from .manus_provider import ManusProvider
-            providers['manus'] = ManusProvider
-        except ImportError:
-            pass
-
-        try:
             from .elevenlabs_provider import ElevenLabsProvider
             providers['elevenlabs'] = ElevenLabsProvider
         except ImportError:
@@ -341,7 +327,7 @@ class ProviderFactory:
 
         Example:
             vision_providers = ProviderFactory.find_providers_with_capability('vision')
-            # Returns: ['openai', 'anthropic', 'xai', 'huggingface', 'manus', 'claude_code']
+            # Returns: ['openai', 'anthropic', 'xai', 'huggingface', 'claude_code']
 
             tts_providers = ProviderFactory.find_providers_with_capability('tts')
             # Returns: ['elevenlabs']
