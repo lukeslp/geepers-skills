@@ -36,10 +36,14 @@ class OpenAIProvider(BaseLLMProvider):
             for msg in messages
         ]
 
+        model = kwargs.get("model", self.model)
+        params = {k: v for k, v in kwargs.items() if k != "model"}
+        if model.startswith('gpt-5') and 'max_tokens' in params:
+            params['max_completion_tokens'] = params.pop('max_tokens')
         response = self.client.chat.completions.create(
-            model=kwargs.get("model", self.model),
+            model=model,
             messages=formatted_messages,
-            **{k: v for k, v in kwargs.items() if k != "model"}
+            **params
         )
 
         return CompletionResponse(
@@ -63,11 +67,15 @@ class OpenAIProvider(BaseLLMProvider):
             for msg in messages
         ]
 
+        model = kwargs.get("model", self.model)
+        params = {k: v for k, v in kwargs.items() if k not in ["model", "stream"]}
+        if model.startswith('gpt-5') and 'max_tokens' in params:
+            params['max_completion_tokens'] = params.pop('max_tokens')
         stream = self.client.chat.completions.create(
-            model=kwargs.get("model", self.model),
+            model=model,
             messages=formatted_messages,
             stream=True,
-            **{k: v for k, v in kwargs.items() if k not in ["model", "stream"]}
+            **params
         )
 
         for chunk in stream:
@@ -163,10 +171,11 @@ class OpenAIProvider(BaseLLMProvider):
             }
         ]
 
+        token_param = "max_completion_tokens" if model.startswith('gpt-5') else "max_tokens"
         response = self.client.chat.completions.create(
             model=model,
             messages=messages,
-            max_tokens=max_tokens
+            **{token_param: max_tokens}
         )
 
         return CompletionResponse(
