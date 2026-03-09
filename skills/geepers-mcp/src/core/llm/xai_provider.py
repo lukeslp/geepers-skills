@@ -108,7 +108,7 @@ class XAIProvider(BaseLLMProvider):
                 "grok-4-heavy",
                 "grok-3",
                 "grok-3-mini",
-                "grok-2-vision-1212",
+                "grok-2-vision-latest",
                 "grok-code-fast-1",
             ]
 
@@ -163,13 +163,13 @@ class XAIProvider(BaseLLMProvider):
             image: Base64-encoded string or raw bytes
             prompt: Question about the image
             **kwargs: Optional parameters
-                - model: Vision model (default: "grok-2-vision-1212")
+                - model: Vision model (default: "grok-2-vision-latest")
                 - max_tokens: Maximum response length
 
         Returns:
             CompletionResponse with image analysis
         """
-        model = kwargs.get("model", "grok-2-vision-1212")
+        model = kwargs.get("model", "grok-2-vision-latest")
         max_tokens = kwargs.get("max_tokens", 500)
 
         # Convert bytes to base64 if needed

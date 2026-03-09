@@ -12,7 +12,7 @@ import base64
 class AnthropicProvider(BaseLLMProvider):
     """Anthropic Claude provider."""
 
-    DEFAULT_MODEL = "claude-sonnet-4-5-20250929"
+    DEFAULT_MODEL = "claude-sonnet-4-6"
 
     def __init__(self, api_key: str = None, model: str = None):
         api_key = api_key or os.getenv("ANTHROPIC_API_KEY")

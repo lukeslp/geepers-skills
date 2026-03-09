@@ -10,7 +10,7 @@ import os
 class GeminiProvider(BaseLLMProvider):
     """Google Gemini provider."""
 
-    DEFAULT_MODEL = "gemini-2.5-pro"
+    DEFAULT_MODEL = "gemini-3-flash-preview"
 
     def __init__(self, api_key: str = None, model: str = None):
         api_key = api_key or os.getenv("GEMINI_API_KEY")
