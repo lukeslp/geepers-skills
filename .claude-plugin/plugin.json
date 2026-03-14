@@ -1,0 +1,17 @@
+{
+  "name": "geepers-skills",
+  "version": "1.0.0",
+  "description": "23 skills for planning, building, shipping, and researching with Claude Code.",
+  "author": {
+    "name": "Luke Steuber",
+    "email": "luke@dr.eamer.dev"
+  },
+  "repository": "https://github.com/lukeslp/geepers-skills",
+  "license": "MIT",
+  "keywords": [
+    "skills",
+    "geepers",
+    "claude-code",
+    "development-workflow"
+  ]
+}
